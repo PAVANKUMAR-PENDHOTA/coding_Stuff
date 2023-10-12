@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 8081;
-require("./app/routes/tutorial.routes")(app);
+require("./app/routes/contact.routes")(app);
 // set port, listen for requests
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

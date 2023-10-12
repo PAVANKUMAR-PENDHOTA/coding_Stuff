@@ -1,9 +1,41 @@
 module.exports = (mongoose) => {
   var schema = mongoose.Schema(
     {
-      title: String,
-      description: String,
-      published: Boolean,
+      name: {
+        type: String,
+        required: true,
+        unique: true,
+        minLength: 2,
+        maxLength: 15,
+      },
+      email: {
+        type: String,
+        required: true,
+        unique: true,
+        validate: {
+          validator: function (v) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+          },
+          message: (props) => `${props.value} is not a valid email address!`,
+        },
+      },
+      mobile: {
+        type: Number,
+        validate: {
+          validator: function (v) {
+            return /^[0-9]{10}$/.test(v);
+          },
+          message: (props) => `${props.value} is not a valid mobile number!`,
+        },
+      },
+      service: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
     },
     { timestamps: true }
   );
@@ -14,8 +46,8 @@ module.exports = (mongoose) => {
     return object;
   });
 
-  const Tutorial = mongoose.model("tutorial", schema);
-  return Tutorial;
+  const Contact = mongoose.model("contact", schema);
+  return Contact;
 };
 
 //   ****************
@@ -31,8 +63,8 @@ module.exports = (mongoose) => {
 // =================================================================
 // *****************
 // module.exports = mongoose => {
-//     const Tutorial = mongoose.model(
-//       "tutorial",
+//     const Contact = mongoose.model(
+//       "contacts",
 //       mongoose.Schema(
 //         {
 //           title: String,
@@ -43,7 +75,7 @@ module.exports = (mongoose) => {
 //       )
 //     );
 
-//     return Tutorial;
+//     return Contact;
 //   };
 
 //   ****************

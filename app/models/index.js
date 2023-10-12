@@ -7,6 +7,6 @@ const db = {};
 mongoose.set("strictQuery", false);
 db.mongoose = mongoose;
 db.url = dbConfig.url;
-db.tutorials = require("./tutorial.model.js")(mongoose);
+db.contacts = require("./contact.model.js")(mongoose);
 
 module.exports = db;
